@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Diário Pré-Viagem</title>
+<title>Desafio até 28/10</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -19,6 +19,8 @@
     --p-600:#6f4fce;
     --p-700:#5638ac;
     --p-900:#2c1f57;
+    --warn:#d1665a;
+    --warn-bg:#fbeceb;
     --text:#241d3d;
     --muted:#7a7192;
     --muted-2:#a89ec2;
@@ -69,6 +71,10 @@
     letter-spacing:-.01em;
     position:relative;
   }
+  .countdown{
+    font-size:12px; color:var(--p-100); position:relative; font-weight:500;
+  }
+  .countdown b{ color:#fff; }
   .datebar{
     display:flex; align-items:center; justify-content:space-between;
     margin-top:16px;
@@ -90,7 +96,6 @@
     letter-spacing:.06em; text-transform:uppercase; font-weight:600;
   }
 
-  /* Progress ring */
   .score{
     display:flex; align-items:center; gap:14px;
     margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.12);
@@ -99,6 +104,25 @@
   .ring{ width:50px; height:50px; flex-shrink:0; }
   .score-text .n{ font-family:'Fraunces',serif; font-size:20px; font-weight:600; color:#fff; }
   .score-text .l{ font-size:10px; color:var(--p-300); letter-spacing:.05em; text-transform:uppercase; margin-top:1px;}
+
+  /* Musculação challenge card */
+  .musc-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:16px 18px;
+    margin-top:10px;
+    box-shadow:var(--shadow);
+  }
+  .musc-top{ display:flex; justify-content:space-between; align-items:baseline; }
+  .musc-top .label{ font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted-2); font-weight:700; }
+  .musc-top .goal{ font-size:11px; color:var(--muted-2); }
+  .musc-main{ display:flex; align-items:baseline; gap:6px; margin-top:6px; }
+  .musc-main .val{ font-family:'Fraunces',serif; font-size:28px; font-weight:600; color:var(--text); }
+  .musc-main .unit{ font-size:13px; color:var(--muted); }
+  .musc-bar{ margin-top:10px; height:8px; border-radius:6px; background:var(--card-soft); overflow:hidden; }
+  .musc-bar .fill{ height:100%; background:linear-gradient(90deg,var(--p-500),var(--p-700)); border-radius:6px; }
+  .musc-note{ font-size:10px; color:var(--muted-2); margin-top:8px; }
 
   /* Section headings */
   .section-title{
@@ -160,6 +184,28 @@
     color:#fff;
   }
 
+  /* Calories card */
+  .kcal-card{
+    background:linear-gradient(160deg, var(--p-600), var(--p-700));
+    border-radius:16px;
+    padding:16px 18px;
+    margin-bottom:10px;
+    color:#fff;
+    box-shadow:var(--shadow);
+  }
+  .kcal-top{ display:flex; justify-content:space-between; align-items:baseline; }
+  .kcal-top .label{ font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--p-100); font-weight:700; }
+  .kcal-main{ display:flex; align-items:baseline; gap:6px; margin-top:6px; }
+  .kcal-main .val{ font-family:'Fraunces',serif; font-size:32px; font-weight:600; }
+  .kcal-main .unit{ font-size:13px; color:var(--p-100); }
+  .kcal-note{ font-size:10px; color:var(--p-100); margin-top:8px; }
+  .kcal-breakdown{ display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
+  .kcal-chip{
+    background:rgba(255,255,255,0.12);
+    font-size:10px; padding:5px 9px; border-radius:20px; color:#fff;
+  }
+  .kcal-chip.empty{ color:var(--p-100); background:rgba(255,255,255,0.06); }
+
   /* Goal cards */
   .goal{
     background:var(--card);
@@ -171,55 +217,37 @@
   }
   .goal-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;}
   .goal-head .name{ font-family:'Fraunces',serif; font-weight:600; font-size:16px; display:flex; align-items:center; gap:9px; color:var(--text);}
-  .dot{ width:9px; height:9px; border-radius:50%; }
+  .dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; }
   .goal-head .check{
-    font-size:10px; padding:4px 9px; border-radius:20px; border:1px solid var(--border); color:var(--muted-2); font-weight:600;
+    font-size:10px; padding:4px 9px; border-radius:20px; border:1px solid var(--border); color:var(--muted-2); font-weight:600; white-space:nowrap;
   }
   .goal-head .check.met{ color:#fff; background:var(--p-600); border-color:var(--p-600);}
+  .goal-head .check.warn{ color:#fff; background:var(--warn); border-color:var(--warn);}
+  .goal-sub{ font-size:11px; color:var(--muted-2); margin-top:-4px; margin-bottom:10px; }
 
   /* Water */
   .water-row{ display:flex; align-items:center; gap:10px; }
   .glasses{ display:flex; gap:6px; flex-wrap:wrap; flex:1; }
   .glass{
-    width:26px; height:32px; border-radius:4px 4px 9px 9px;
+    width:22px; height:28px; border-radius:4px 4px 8px 8px;
     border:1.5px solid var(--border);
     background:var(--card-soft);
     cursor:pointer;
     position:relative;
   }
   .glass.filled{ background:linear-gradient(var(--p-500), var(--p-700)); border-color:var(--p-600); }
-  .goal-edit{
-    display:flex; gap:8px; align-items:center; margin-top:12px; font-size:11px; color:var(--muted-2);
-  }
-  .goal-edit b{ color:var(--text); }
-  .goal-edit button{
-    width:24px; height:24px; border-radius:8px; border:1px solid var(--border);
-    background:var(--card-soft); color:var(--text); cursor:pointer; font-size:14px;
+
+  /* Stepper (livro / tela) */
+  .stepper-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .stepper-val{ font-family:'Fraunces',serif; font-size:22px; font-weight:600; color:var(--text); min-width:70px; }
+  .stepper-val .of{ font-size:12px; color:var(--muted-2); font-family:'Manrope',sans-serif; font-weight:500; }
+  .stepper-btns{ display:flex; gap:8px; }
+  .stepper-btns button{
+    width:32px; height:32px; border-radius:9px; border:1px solid var(--border);
+    background:var(--card-soft); color:var(--text); cursor:pointer; font-size:16px;
   }
 
-  /* Exercise chips */
-  .chiprow{ display:flex; gap:8px; flex-wrap:wrap; }
-  .chip{
-    flex:1; min-width:90px;
-    border:1.5px solid var(--border);
-    background:var(--card-soft);
-    color:var(--muted);
-    padding:13px 8px;
-    border-radius:12px;
-    text-align:center;
-    font-size:12px;
-    font-weight:500;
-    cursor:pointer;
-  }
-  .chip .ic{ display:block; font-size:18px; margin-bottom:5px; }
-  .chip.selected{
-    background:var(--p-600);
-    border-color:var(--p-600);
-    color:#fff;
-  }
-  .hint{ font-size:10px; color:var(--muted-2); margin-top:10px; }
-
-  /* Estudos toggle */
+  /* Toggle switch */
   .toggle-row{ display:flex; align-items:center; justify-content:space-between; }
   .toggle-row .desc{ font-size:11px; color:var(--muted-2); max-width:70%; }
   .switch{
@@ -233,32 +261,12 @@
   .switch.on{ background:var(--p-600); border-color:var(--p-600); }
   .switch.on .knob{ left:23px; background:#fff; }
 
-  /* Calories card */
-  .kcal-card{
-    background:linear-gradient(160deg, var(--p-600), var(--p-700));
-    border-radius:16px;
-    padding:16px 18px;
-    margin-bottom:10px;
-    color:#fff;
-    box-shadow:var(--shadow);
+  .gratitude-box textarea{
+    width:100%; border:1.5px solid var(--border); border-radius:10px; background:var(--card-soft);
+    color:var(--text); font-family:'Manrope',sans-serif; font-size:12px; padding:10px;
+    resize:vertical; min-height:60px;
   }
-  .kcal-top{ display:flex; justify-content:space-between; align-items:baseline; }
-  .kcal-top .label{ font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--p-100); font-weight:700; }
-  .kcal-top .goal{ font-size:11px; color:var(--p-100); }
-  .kcal-main{ display:flex; align-items:baseline; gap:6px; margin-top:6px; }
-  .kcal-main .val{ font-family:'Fraunces',serif; font-size:32px; font-weight:600; }
-  .kcal-main .unit{ font-size:13px; color:var(--p-100); }
-  .kcal-bar{
-    margin-top:12px; height:6px; border-radius:6px; background:rgba(255,255,255,0.18); overflow:hidden;
-  }
-  .kcal-bar .fill{ height:100%; background:#fff; border-radius:6px; }
-  .kcal-note{ font-size:10px; color:var(--p-100); margin-top:8px; }
-  .kcal-breakdown{ display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
-  .kcal-chip{
-    background:rgba(255,255,255,0.12);
-    font-size:10px; padding:5px 9px; border-radius:20px; color:#fff;
-  }
-  .kcal-chip.empty{ color:var(--p-100); background:rgba(255,255,255,0.06); }
+  .gratitude-box textarea::placeholder{ color:var(--muted-2); }
 
   /* Consolidated / summary */
   .summary-card{
@@ -302,6 +310,32 @@
   .stat-tile .v{ font-family:'Fraunces',serif; font-size:18px; font-weight:600; color:var(--text); }
   .stat-tile .l{ font-size:9px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.04em; margin-top:2px; }
 
+  /* Weight card */
+  .weight-input-row{
+    display:flex; align-items:baseline; justify-content:flex-end; gap:6px;
+  }
+  .weight-input-row input[type=number]{
+    width:120px; font-family:'Fraunces',serif; font-size:26px; font-weight:600;
+    text-align:right; border:none; background:transparent; color:var(--text);
+    outline:none; -moz-appearance:textfield;
+  }
+  .weight-input-row input[type=number]::-webkit-outer-spin-button,
+  .weight-input-row input[type=number]::-webkit-inner-spin-button{
+    -webkit-appearance:none; margin:0;
+  }
+  .weight-input-row .unit{ font-size:13px; color:var(--muted-2); }
+  .weight-chart-card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:16px; margin-bottom:10px; box-shadow:var(--shadow);
+  }
+  .weight-chart-empty{ font-size:11px; color:var(--muted-2); text-align:center; padding:20px 0; }
+  .weight-stats{ display:flex; justify-content:space-between; margin-top:12px; }
+  .weight-stat{ text-align:center; flex:1; }
+  .weight-stat .v{ font-family:'Fraunces',serif; font-size:15px; font-weight:600; color:var(--text); }
+  .weight-stat .l{ font-size:9px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.04em; margin-top:2px; }
+  .weight-stat .v.down{ color:var(--p-600); }
+  .weight-stat .v.up{ color:var(--warn); }
+
   .footer-note{
     text-align:center; font-size:10px; color:var(--muted-2); margin-top:26px; line-height:1.6;
   }
@@ -314,6 +348,7 @@
 </div>
 
 <script>
+const CHALLENGE_END = new Date(2026, 9, 28); // 28/10/2026
 const MEALS = [
   { id:'cafe', label:'Café da manhã', options:[
     {id:'original', name:'Pão + ovo + fruta', kcal:260},
@@ -332,17 +367,6 @@ const MEALS = [
     {id:'sub3', name:'Iogurte + fruta + whey', kcal:240},
     {id:'sub4', name:'Aveia + banana + ovo + cacau + whey', kcal:320},
   ]},
-  { id:'jantar', label:'Jantar', options:[
-    {id:'original', name:'Pão francês + muçarela + frango + salada', kcal:380},
-    {id:'sub1', name:'Tapioca + 2 ovos + muçarela + frango + salada', kcal:410},
-    {id:'sub2', name:'Arroz + feijão + frango 100g + salada', kcal:330},
-  ]},
-];
-
-const EXERCISES = [
-  {id:'cardio', label:'Cardio', ic:'🏃'},
-  {id:'musculacao', label:'Musculação', ic:'🏋️'},
-  {id:'natacao', label:'Natação', ic:'🏊'},
 ];
 
 const WEEKDAYS = ['dom','seg','ter','qua','qui','sex','sáb'];
@@ -358,24 +382,33 @@ function todayStr(){ return fmtDate(new Date()); }
 
 let currentDate = new Date();
 let dayData = null;
-let config = { waterGoal: 8, kcalGoal: 1700 };
+let config = { waterGoal:12, livroMeta:10, telaMax:4, muscMeta:25 };
 let allDaysMap = {};
 let summaryMode = 'week';
 
 function emptyDay(){
   return {
-    meals: { cafe:null, almoco:null, lanche:null, jantar:null },
-    water: 0,
-    exercise: { cardio:false, musculacao:false, natacao:false },
-    estudos: false
+    meals: { cafe:null, almoco:null, lanche:null },
+    jantarJejum:false,
+    water:0,
+    semAcucar:false,
+    livroPaginas:0,
+    telaHoras:0,
+    videoPodcast:false,
+    cardio:false,
+    musculacao:false,
+    gratidao:false,
+    gratidaoTexto:'',
+    skincare:false,
+    peso:null
   };
 }
 
 async function loadConfig(){
   try{
     const raw = localStorage.getItem('config');
-    if(raw) config = Object.assign({ waterGoal: 8, kcalGoal: 1700 }, JSON.parse(raw));
-  }catch(e){ /* no config yet, use default */ }
+    if(raw) config = Object.assign({ waterGoal:12, livroMeta:10, telaMax:4, muscMeta:25 }, JSON.parse(raw));
+  }catch(e){}
 }
 async function saveConfig(){
   try{ localStorage.setItem('config', JSON.stringify(config)); }catch(e){ console.error(e); }
@@ -383,20 +416,19 @@ async function saveConfig(){
 async function loadDay(dateStr){
   try{
     const raw = localStorage.getItem('day:'+dateStr);
-    if(raw) return JSON.parse(raw);
-  }catch(e){ /* not found */ }
+    if(raw) return Object.assign(emptyDay(), JSON.parse(raw));
+  }catch(e){}
   return emptyDay();
 }
 async function saveDay(dateStr, data){
   try{ localStorage.setItem('day:'+dateStr, JSON.stringify(data)); }catch(e){ console.error(e); }
 }
-
 function getAllDaysMap(){
   const map = {};
   for(let i=0;i<localStorage.length;i++){
     const k = localStorage.key(i);
     if(k && k.startsWith('day:')){
-      try{ map[k.slice(4)] = JSON.parse(localStorage.getItem(k)); }catch(e){}
+      try{ map[k.slice(4)] = Object.assign(emptyDay(), JSON.parse(localStorage.getItem(k))); }catch(e){}
     }
   }
   return map;
@@ -405,12 +437,19 @@ function getAllDaysMap(){
 function completionCount(d){
   let n = 0;
   MEALS.forEach(m => { if(d.meals[m.id]) n++; });
+  if(d.jantarJejum) n++;
   if(d.water >= config.waterGoal) n++;
-  if(d.exercise.cardio || d.exercise.musculacao || d.exercise.natacao) n++;
-  if(d.estudos) n++;
+  if(d.semAcucar) n++;
+  if(d.livroPaginas >= config.livroMeta) n++;
+  if(d.telaHoras <= config.telaMax) n++;
+  if(d.videoPodcast) n++;
+  if(d.cardio) n++;
+  if(d.musculacao) n++;
+  if(d.gratidao) n++;
+  if(d.skincare) n++;
   return n;
 }
-const TOTAL_ITEMS = MEALS.length + 3;
+const TOTAL_ITEMS = MEALS.length + 10;
 
 function kcalTotal(d){
   let total = 0;
@@ -436,11 +475,17 @@ function ringSVG(pct){
   </svg>`;
 }
 
+function muscTotalCount(){
+  let n = 0;
+  Object.keys(allDaysMap).forEach(k => { if(allDaysMap[k].musculacao) n++; });
+  if(!allDaysMap[fmtDate(currentDate)]) { if(dayData && dayData.musculacao) n++; }
+  return n;
+}
+
 function dayScorePct(d){
   if(!d) return 0;
   return Math.round((completionCount(d)/TOTAL_ITEMS)*100);
 }
-
 function scoreColor(pct, hasData){
   if(!hasData) return null;
   if(pct>=100) return 'var(--p-700)';
@@ -457,22 +502,27 @@ function scoreTextColor(pct, hasData){
 }
 
 function periodStats(dates){
-  let tracked=0, sumPct=0, waterDays=0, exDays=0, estudosDays=0, mealsLogged=0;
+  let tracked=0, sumPct=0, waterDays=0, semAcucarDays=0, cardioDays=0, muscDays=0,
+      gratidaoDays=0, skincareDays=0, videoDays=0, telaOkDays=0, livroTotal=0, mealsLogged=0;
   dates.forEach(dStr => {
     const d = allDaysMap[dStr];
     if(!d) return;
     tracked++;
     sumPct += dayScorePct(d);
     if(d.water >= config.waterGoal) waterDays++;
-    if(d.exercise.cardio || d.exercise.musculacao || d.exercise.natacao) exDays++;
-    if(d.estudos) estudosDays++;
+    if(d.semAcucar) semAcucarDays++;
+    if(d.cardio) cardioDays++;
+    if(d.musculacao) muscDays++;
+    if(d.gratidao) gratidaoDays++;
+    if(d.skincare) skincareDays++;
+    if(d.videoPodcast) videoDays++;
+    if(d.telaHoras <= config.telaMax) telaOkDays++;
+    livroTotal += (d.livroPaginas||0);
     MEALS.forEach(m => { const s=d.meals[m.id]; if(s && s!=='none') mealsLogged++; });
+    if(d.jantarJejum) mealsLogged++;
   });
-  return {
-    tracked, total:dates.length,
-    avgPct: tracked ? Math.round(sumPct/tracked) : 0,
-    waterDays, exDays, estudosDays, mealsLogged
-  };
+  return { tracked, total:dates.length, avgPct: tracked?Math.round(sumPct/tracked):0,
+    waterDays, semAcucarDays, cardioDays, muscDays, gratidaoDays, skincareDays, videoDays, telaOkDays, livroTotal, mealsLogged };
 }
 
 function buildSummaryHTML(){
@@ -481,10 +531,7 @@ function buildSummaryHTML(){
   let dates = [];
 
   if(summaryMode === 'week'){
-    for(let i=6;i>=0;i--){
-      const d = new Date(now); d.setDate(now.getDate()-i);
-      dates.push(fmtDate(d));
-    }
+    for(let i=6;i>=0;i--){ const d = new Date(now); d.setDate(now.getDate()-i); dates.push(fmtDate(d)); }
     bodyHtml += `<div class="heatmap-week">`;
     dates.forEach(dStr => {
       const d = allDaysMap[dStr];
@@ -503,7 +550,7 @@ function buildSummaryHTML(){
     const y = now.getFullYear(), m = now.getMonth();
     const firstDay = new Date(y, m, 1);
     const daysInMonth = new Date(y, m+1, 0).getDate();
-    const startOffset = firstDay.getDay(); // 0=dom
+    const startOffset = firstDay.getDay();
     bodyHtml += `<div class="month-head">${WEEKDAYS.map(w=>`<span>${w}</span>`).join('')}</div>`;
     bodyHtml += `<div class="heatmap-month">`;
     for(let i=0;i<startOffset;i++) bodyHtml += `<div class="cell blank"></div>`;
@@ -512,10 +559,7 @@ function buildSummaryHTML(){
       const dStr = fmtDate(dt);
       const isFuture = dt > now;
       dates.push(dStr);
-      if(isFuture){
-        bodyHtml += `<div class="cell future">${day}</div>`;
-        continue;
-      }
+      if(isFuture){ bodyHtml += `<div class="cell future">${day}</div>`; continue; }
       const d = allDaysMap[dStr];
       const hasData = !!d;
       const pct = dayScorePct(d);
@@ -524,7 +568,6 @@ function buildSummaryHTML(){
       bodyHtml += `<div class="cell" style="background:${bg||'transparent'};color:${fg};${!hasData?'border-style:dashed':''}">${day}</div>`;
     }
     bodyHtml += `</div>`;
-    // only count days up to today for stats
     dates = dates.filter(dStr => new Date(dStr+'T00:00:00') <= now);
   }
 
@@ -541,10 +584,14 @@ function buildSummaryHTML(){
   bodyHtml += `<div class="stat-grid">
     <div class="stat-tile"><div class="v">${st.tracked}/${st.total}</div><div class="l">dias registrados</div></div>
     <div class="stat-tile"><div class="v">${st.avgPct}%</div><div class="l">média de conclusão</div></div>
-    <div class="stat-tile"><div class="v">${st.waterDays}</div><div class="l">dias com água em dia</div></div>
-    <div class="stat-tile"><div class="v">${st.exDays}</div><div class="l">dias com exercício</div></div>
-    <div class="stat-tile"><div class="v">${st.estudosDays}</div><div class="l">dias de estudo</div></div>
-    <div class="stat-tile"><div class="v">${st.mealsLogged}</div><div class="l">refeições registradas</div></div>
+    <div class="stat-tile"><div class="v">${st.cardioDays}</div><div class="l">dias com cardio</div></div>
+    <div class="stat-tile"><div class="v">${st.muscDays}</div><div class="l">treinos no período</div></div>
+    <div class="stat-tile"><div class="v">${st.semAcucarDays}</div><div class="l">dias sem açúcar</div></div>
+    <div class="stat-tile"><div class="v">${st.telaOkDays}</div><div class="l">dias com tela ok</div></div>
+    <div class="stat-tile"><div class="v">${st.gratidaoDays}</div><div class="l">dias de gratidão</div></div>
+    <div class="stat-tile"><div class="v">${st.skincareDays}</div><div class="l">dias de skincare</div></div>
+    <div class="stat-tile"><div class="v">${st.videoDays}</div><div class="l">vídeos/podcasts</div></div>
+    <div class="stat-tile"><div class="v">${st.livroTotal}</div><div class="l">páginas lidas</div></div>
   </div>`;
 
   return `<div class="section-title">Consolidado</div>
@@ -557,6 +604,38 @@ function buildSummaryHTML(){
   </div>`;
 }
 
+function getWeightSeries(){
+  return Object.keys(allDaysMap)
+    .filter(k => allDaysMap[k].peso != null && allDaysMap[k].peso !== '')
+    .sort()
+    .map(k => ({ date:k, peso: parseFloat(allDaysMap[k].peso) }));
+}
+
+function weightChartSVG(series){
+  const W = 480, H = 150, padX = 12, padY = 18;
+  const vals = series.map(s => s.peso);
+  const min = Math.min(...vals), max = Math.max(...vals);
+  const range = (max - min) || 1;
+  const stepX = series.length > 1 ? (W - padX*2) / (series.length - 1) : 0;
+  const points = series.map((s,i) => {
+    const x = padX + i*stepX;
+    const y = padY + (H - padY*2) * (1 - (s.peso - min) / range);
+    return { x, y, ...s };
+  });
+  const pathD = points.map((p,i) => (i===0?'M':'L') + p.x.toFixed(1) + ' ' + p.y.toFixed(1)).join(' ');
+  const areaD = pathD + ` L ${points[points.length-1].x.toFixed(1)} ${H-padY} L ${points[0].x.toFixed(1)} ${H-padY} Z`;
+  const dots = points.map(p => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.5" fill="var(--p-700)" stroke="#fff" stroke-width="1.5"/>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block;">
+    <defs><linearGradient id="wgrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8768de" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#8768de" stop-opacity="0"/>
+    </linearGradient></defs>
+    <path d="${areaD}" fill="url(#wgrad)"/>
+    <path d="${pathD}" fill="none" stroke="var(--p-600)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    ${dots}
+  </svg>`;
+}
+
 function render(){
   const app = document.getElementById('app');
   const dStr = fmtDate(currentDate);
@@ -564,12 +643,18 @@ function render(){
   const done = completionCount(dayData);
   const pct = Math.round((done/TOTAL_ITEMS)*100);
 
+  const now = new Date();
+  const daysLeft = Math.ceil((CHALLENGE_END - new Date(now.getFullYear(),now.getMonth(),now.getDate())) / 86400000);
+  const muscTotal = muscTotalCount();
+  const muscPct = Math.min(100, Math.round((muscTotal/config.muscMeta)*100));
+
   let html = '';
 
   html += `<div class="pass">
     ${isToday ? '<div class="today-pill">hoje</div>' : ''}
-    <div class="eyebrow">Diário · pré-viagem</div>
-    <h1>Check-in do dia</h1>
+    <div class="eyebrow">Desafio</div>
+    <h1>Até 28 de outubro</h1>
+    <div class="countdown">${daysLeft >= 0 ? `<b>${daysLeft}</b> dias restantes` : 'desafio encerrado'}</div>
     <div class="datebar">
       <button class="navbtn" id="prevBtn">‹</button>
       <div class="datelabel">
@@ -582,10 +667,50 @@ function render(){
       ${ringSVG(pct)}
       <div class="score-text">
         <div class="n">${done}/${TOTAL_ITEMS}</div>
-        <div class="l">metas concluídas</div>
+        <div class="l">metas do dia</div>
       </div>
     </div>
   </div>`;
+
+  html += `<div class="musc-card">
+    <div class="musc-top">
+      <div class="label">Musculação no desafio</div>
+      <div class="goal">meta ${config.muscMeta} treinos</div>
+    </div>
+    <div class="musc-main"><span class="val">${muscTotal}</span><span class="unit">/ ${config.muscMeta} treinos até 28/10</span></div>
+    <div class="musc-bar"><div class="fill" style="width:${muscPct}%"></div></div>
+    <div class="musc-note">${muscTotal >= config.muscMeta ? 'meta batida! 🎉' : `faltam ${config.muscMeta-muscTotal} treinos`}</div>
+  </div>`;
+
+  const weightSeries = getWeightSeries();
+  html += `<div class="section-title">Peso</div>`;
+  html += `<div class="goal">
+    <div class="goal-head">
+      <div class="name"><span class="dot" style="background:var(--p-600)"></span>Peso de hoje</div>
+    </div>
+    <div class="weight-input-row">
+      <input type="number" step="0.1" min="0" id="pesoInput" value="${dayData.peso ?? ''}" placeholder="—" />
+      <span class="unit">kg</span>
+    </div>
+  </div>`;
+
+  if(weightSeries.length >= 2){
+    const vals = weightSeries.map(s=>s.peso);
+    const first = vals[0], last = vals[vals.length-1];
+    const diff = +(last-first).toFixed(1);
+    const min = Math.min(...vals), max = Math.max(...vals);
+    html += `<div class="weight-chart-card">
+      ${weightChartSVG(weightSeries)}
+      <div class="weight-stats">
+        <div class="weight-stat"><div class="v">${last} kg</div><div class="l">atual</div></div>
+        <div class="weight-stat"><div class="v ${diff<0?'down':(diff>0?'up':'')}">${diff>0?'+':''}${diff} kg</div><div class="l">variação</div></div>
+        <div class="weight-stat"><div class="v">${min} kg</div><div class="l">mínimo</div></div>
+        <div class="weight-stat"><div class="v">${max} kg</div><div class="l">máximo</div></div>
+      </div>
+    </div>`;
+  } else {
+    html += `<div class="weight-chart-card"><div class="weight-chart-empty">registre o peso em pelo menos 2 dias para ver a evolução</div></div>`;
+  }
 
   html += `<div class="section-title">Refeições</div>`;
   MEALS.forEach(meal => {
@@ -593,7 +718,7 @@ function render(){
     html += `<div class="meal">
       <div class="meal-head">
         <div class="name">${meal.label}</div>
-        <div class="status ${sel ? 'done' : ''}">${sel ? '✓ registrado' : 'pendente'}</div>
+        <div class="status ${sel ? 'done' : ''}">${sel ? '✓ dentro da dieta' : 'pendente'}</div>
       </div>
       <div class="opts">`;
     meal.options.forEach(opt => {
@@ -602,34 +727,31 @@ function render(){
         ${opt.name}<span class="kcal">${opt.kcal} kcal</span>
       </button>`;
     });
-    html += `<button class="opt skip ${sel==='none'?'selected':''}" data-meal="${meal.id}" data-opt="none">não comi</button>`;
+    html += `<button class="opt skip ${sel==='none'?'selected':''}" data-meal="${meal.id}" data-opt="none">não segui</button>`;
     html += `</div></div>`;
   });
 
-  const kc = kcalTotal(dayData);
-  const kcalPct = Math.min(100, Math.round((kc.total / config.kcalGoal) * 100));
-  const diff = config.kcalGoal - kc.total;
-  html += `<div class="kcal-card">
-    <div class="kcal-top">
-      <div class="label">Calorias ingeridas</div>
-      <div class="goal">meta ${config.kcalGoal} kcal</div>
+  html += `<div class="meal">
+    <div class="meal-head">
+      <div class="name">Jantar</div>
+      <div class="status ${dayData.jantarJejum ? 'done' : ''}">${dayData.jantarJejum ? '✓ em jejum' : 'pendente'}</div>
     </div>
+    <div class="toggle-row">
+      <div class="desc">Fiquei em jejum no jantar hoje</div>
+      <div class="switch ${dayData.jantarJejum?'on':''}" id="jantarToggle"><div class="knob"></div></div>
+    </div>
+  </div>`;
+
+  const kc = kcalTotal(dayData);
+  html += `<div class="kcal-card">
+    <div class="kcal-top"><div class="label">Calorias das refeições</div></div>
     <div class="kcal-main"><span class="val">${kc.total}</span><span class="unit">kcal</span></div>
-    <div class="kcal-bar"><div class="fill" style="width:${kcalPct}%"></div></div>
-    <div class="kcal-note">${
-      kc.parts.length === 0
-        ? 'nenhuma refeição registrada ainda'
-        : diff >= 0
-          ? `faltam ${diff} kcal para a meta de referência`
-          : `${Math.abs(diff)} kcal acima da meta de referência`
-    }</div>
+    <div class="kcal-note">${kc.parts.length === 0 ? 'nenhuma refeição registrada ainda' : 'café + almoço + lanche · jantar em jejum não soma calorias'}</div>
     <div class="kcal-breakdown">
       ${MEALS.map(m => {
         const selId = dayData.meals[m.id];
         const opt = selId && selId !== 'none' ? m.options.find(o => o.id === selId) : null;
-        return opt
-          ? `<div class="kcal-chip">${m.label} · ${opt.kcal} kcal</div>`
-          : `<div class="kcal-chip empty">${m.label} · —</div>`;
+        return opt ? `<div class="kcal-chip">${m.label} · ${opt.kcal} kcal</div>` : `<div class="kcal-chip empty">${m.label} · —</div>`;
       }).join('')}
     </div>
   </div>`;
@@ -639,45 +761,107 @@ function render(){
   const waterMet = dayData.water >= config.waterGoal;
   html += `<div class="goal">
     <div class="goal-head">
-      <div class="name"><span class="dot" style="background:var(--p-500)"></span>Água</div>
+      <div class="name"><span class="dot" style="background:var(--p-500)"></span>Água · meta 3L</div>
       <div class="check ${waterMet?'met':''}">${waterMet ? 'meta batida' : dayData.water+'/'+config.waterGoal}</div>
     </div>
-    <div class="water-row">
-      <div class="glasses" id="glasses">`;
-  for(let i=0;i<config.waterGoal;i++){
-    html += `<div class="glass ${i < dayData.water ? 'filled':''}" data-idx="${i}"></div>`;
-  }
-  html += `</div></div>
-    <div class="goal-edit">
-      meta: <span id="goalNum"><b>${config.waterGoal}</b> copos (~${(config.waterGoal*0.25).toFixed(2)} L)</span>
-      <button id="goalMinus">−</button>
-      <button id="goalPlus">+</button>
+    <div class="water-row"><div class="glasses" id="glasses">`;
+  for(let i=0;i<config.waterGoal;i++){ html += `<div class="glass ${i < dayData.water ? 'filled':''}" data-idx="${i}"></div>`; }
+  html += `</div></div></div>`;
+
+  html += `<div class="goal">
+    <div class="goal-head">
+      <div class="name"><span class="dot" style="background:var(--p-600)"></span>Sem açúcar</div>
+      <div class="check ${dayData.semAcucar?'met':''}">${dayData.semAcucar?'meta batida':'pendente'}</div>
+    </div>
+    <div class="toggle-row">
+      <div class="desc">Não consumi açúcar hoje</div>
+      <div class="switch ${dayData.semAcucar?'on':''}" id="acucarToggle"><div class="knob"></div></div>
     </div>
   </div>`;
 
-  const exMet = dayData.exercise.cardio || dayData.exercise.musculacao || dayData.exercise.natacao;
+  const livroMet = dayData.livroPaginas >= config.livroMeta;
   html += `<div class="goal">
     <div class="goal-head">
-      <div class="name"><span class="dot" style="background:var(--p-600)"></span>Exercício físico</div>
-      <div class="check ${exMet?'met':''}">${exMet ? 'meta batida' : 'pendente'}</div>
+      <div class="name"><span class="dot" style="background:var(--p-700)"></span>Livro</div>
+      <div class="check ${livroMet?'met':''}">${livroMet?'meta batida':'pendente'}</div>
     </div>
-    <div class="chiprow">`;
-  EXERCISES.forEach(ex => {
-    const isSel = dayData.exercise[ex.id];
-    html += `<div class="chip ${isSel?'selected':''}" data-ex="${ex.id}">
-      <span class="ic">${ex.ic}</span>${ex.label}
-    </div>`;
-  });
-  html += `</div><div class="hint">pelo menos 1 dos 3 conta como meta cumprida</div></div>`;
+    <div class="stepper-row">
+      <div class="stepper-val">${dayData.livroPaginas} <span class="of">/ ${config.livroMeta} pág.</span></div>
+      <div class="stepper-btns">
+        <button id="livroMinus">−</button>
+        <button id="livroPlus">+</button>
+      </div>
+    </div>
+  </div>`;
+
+  const telaMet = dayData.telaHoras <= config.telaMax;
+  html += `<div class="goal">
+    <div class="goal-head">
+      <div class="name"><span class="dot" style="background:var(--p-300)"></span>Tela</div>
+      <div class="check ${telaMet?'met':'warn'}">${telaMet?'dentro do limite':'acima do limite'}</div>
+    </div>
+    <div class="goal-sub">máx. ${config.telaMax}h de tela por dia</div>
+    <div class="stepper-row">
+      <div class="stepper-val">${dayData.telaHoras}<span class="of">h</span></div>
+      <div class="stepper-btns">
+        <button id="telaMinus">−</button>
+        <button id="telaPlus">+</button>
+      </div>
+    </div>
+  </div>`;
 
   html += `<div class="goal">
     <div class="goal-head">
-      <div class="name"><span class="dot" style="background:var(--p-900)"></span>Estudos</div>
-      <div class="check ${dayData.estudos?'met':''}">${dayData.estudos?'meta batida':'pendente'}</div>
+      <div class="name"><span class="dot" style="background:var(--p-500)"></span>Vídeo/podcast diferente</div>
+      <div class="check ${dayData.videoPodcast?'met':''}">${dayData.videoPodcast?'meta batida':'pendente'}</div>
     </div>
     <div class="toggle-row">
-      <div class="desc">Marcar como estudado hoje</div>
-      <div class="switch ${dayData.estudos?'on':''}" id="estudosToggle"><div class="knob"></div></div>
+      <div class="desc">Assisti/ouvi algo novo hoje</div>
+      <div class="switch ${dayData.videoPodcast?'on':''}" id="videoToggle"><div class="knob"></div></div>
+    </div>
+  </div>`;
+
+  html += `<div class="goal">
+    <div class="goal-head">
+      <div class="name"><span class="dot" style="background:var(--p-600)"></span>Cardio</div>
+      <div class="check ${dayData.cardio?'met':''}">${dayData.cardio?'meta batida':'pendente'}</div>
+    </div>
+    <div class="toggle-row">
+      <div class="desc">Cardio todos os dias</div>
+      <div class="switch ${dayData.cardio?'on':''}" id="cardioToggle"><div class="knob"></div></div>
+    </div>
+  </div>`;
+
+  html += `<div class="goal">
+    <div class="goal-head">
+      <div class="name"><span class="dot" style="background:var(--p-700)"></span>Musculação</div>
+      <div class="check ${dayData.musculacao?'met':''}">${dayData.musculacao?'treino feito':'pendente'}</div>
+    </div>
+    <div class="toggle-row">
+      <div class="desc">Treinei musculação hoje (soma para os 25)</div>
+      <div class="switch ${dayData.musculacao?'on':''}" id="muscToggle"><div class="knob"></div></div>
+    </div>
+  </div>`;
+
+  html += `<div class="goal">
+    <div class="goal-head">
+      <div class="name"><span class="dot" style="background:var(--p-900)"></span>Diário da gratidão</div>
+      <div class="check ${dayData.gratidao?'met':''}">${dayData.gratidao?'meta batida':'pendente'}</div>
+    </div>
+    <div class="toggle-row">
+      <div class="desc">Escrevi/pensei na gratidão de hoje</div>
+      <div class="switch ${dayData.gratidao?'on':''}" id="gratidaoToggle"><div class="knob"></div></div>
+    </div>
+  </div>`;
+
+  html += `<div class="goal">
+    <div class="goal-head">
+      <div class="name"><span class="dot" style="background:var(--p-300)"></span>Skincare</div>
+      <div class="check ${dayData.skincare?'met':''}">${dayData.skincare?'meta batida':'pendente'}</div>
+    </div>
+    <div class="toggle-row">
+      <div class="desc">Rotina de skincare feita</div>
+      <div class="switch ${dayData.skincare?'on':''}" id="skincareToggle"><div class="knob"></div></div>
     </div>
   </div>`;
 
@@ -697,8 +881,7 @@ function attachHandlers(){
     btn.onclick = () => {
       const meal = btn.dataset.meal, opt = btn.dataset.opt;
       dayData.meals[meal] = (dayData.meals[meal] === opt) ? null : opt;
-      persist();
-      render();
+      persist(); render();
     };
   });
 
@@ -706,32 +889,32 @@ function attachHandlers(){
     g.onclick = () => {
       const idx = parseInt(g.dataset.idx,10);
       dayData.water = (dayData.water === idx+1) ? idx : idx+1;
-      persist();
-      render();
+      persist(); render();
     };
   });
 
-  document.getElementById('goalMinus').onclick = async () => {
-    if(config.waterGoal > 1){ config.waterGoal--; await saveConfig(); render(); }
-  };
-  document.getElementById('goalPlus').onclick = async () => {
-    if(config.waterGoal < 16){ config.waterGoal++; await saveConfig(); render(); }
-  };
+  document.getElementById('jantarToggle').onclick = () => { dayData.jantarJejum = !dayData.jantarJejum; persist(); render(); };
+  document.getElementById('acucarToggle').onclick = () => { dayData.semAcucar = !dayData.semAcucar; persist(); render(); };
+  document.getElementById('videoToggle').onclick = () => { dayData.videoPodcast = !dayData.videoPodcast; persist(); render(); };
+  document.getElementById('cardioToggle').onclick = () => { dayData.cardio = !dayData.cardio; persist(); render(); };
+  document.getElementById('muscToggle').onclick = () => { dayData.musculacao = !dayData.musculacao; persist(); render(); };
+  document.getElementById('skincareToggle').onclick = () => { dayData.skincare = !dayData.skincare; persist(); render(); };
 
-  document.querySelectorAll('.chip').forEach(chip => {
-    chip.onclick = () => {
-      const ex = chip.dataset.ex;
-      dayData.exercise[ex] = !dayData.exercise[ex];
-      persist();
-      render();
-    };
-  });
+  document.getElementById('livroMinus').onclick = () => { dayData.livroPaginas = Math.max(0, dayData.livroPaginas-1); persist(); render(); };
+  document.getElementById('livroPlus').onclick = () => { dayData.livroPaginas += 1; persist(); render(); };
+  document.getElementById('telaMinus').onclick = () => { dayData.telaHoras = Math.max(0, +(dayData.telaHoras-0.5).toFixed(1)); persist(); render(); };
+  document.getElementById('telaPlus').onclick = () => { dayData.telaHoras = +(dayData.telaHoras+0.5).toFixed(1); persist(); render(); };
 
-  document.getElementById('estudosToggle').onclick = () => {
-    dayData.estudos = !dayData.estudos;
+  document.getElementById('gratidaoToggle').onclick = () => { dayData.gratidao = !dayData.gratidao; persist(); render(); };
+
+  const pesoInput = document.getElementById('pesoInput');
+  pesoInput.addEventListener('change', () => {
+    const v = parseFloat(pesoInput.value);
+    dayData.peso = isNaN(v) ? null : v;
     persist();
+    allDaysMap[fmtDate(currentDate)] = dayData;
     render();
-  };
+  });
 
   const tabWeek = document.getElementById('tabWeek');
   const tabMonth = document.getElementById('tabMonth');
