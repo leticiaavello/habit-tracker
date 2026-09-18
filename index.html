@@ -17,6 +17,8 @@
     --p-600:#6f4fce;
     --p-700:#5638ac;
     --p-900:#2c1f57;
+    --gold:#c9a227;
+    --gold-bg:#faf3dd;
     --warn:#c9564a;
     --text:#251f38;
     --muted:#79708f;
@@ -24,122 +26,87 @@
   }
   *{box-sizing:border-box;}
   body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Manrope', sans-serif;
-    -webkit-font-smoothing:antialiased;
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Manrope', sans-serif; -webkit-font-smoothing:antialiased;
     padding-bottom:40px;
   }
   .wrap{max-width:560px;margin:0 auto;padding:18px 14px 8px;}
 
-  /* Header */
-  .header{
-    background:var(--p-700);
-    border-radius:14px;
-    padding:16px 18px;
-    color:#fff;
-  }
+  .header{ background:var(--p-700); border-radius:14px; padding:16px 18px; color:#fff; }
   .eyebrow{ font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--p-300); font-weight:700; }
   h1{ font-family:'Fraunces', serif; font-weight:600; font-size:22px; margin:3px 0 10px; }
   .header-row{ display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--p-100); border-top:1px solid rgba(255,255,255,0.15); padding-top:10px; }
   .header-row b{ color:#fff; font-size:12px; }
 
-  /* Legend */
-  .legend-card{
-    background:var(--card); border:1px solid var(--border); border-radius:12px;
-    padding:12px 14px; margin-top:10px;
-  }
+  .legend-card{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px 14px; margin-top:10px; }
   .legend-title{ font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:8px; }
   .legend-grid{ display:grid; grid-template-columns:1fr 1fr; gap:6px 10px; }
   .legend-item{ font-size:10.5px; color:var(--muted); line-height:1.4; }
   .legend-item b{ color:var(--text); }
+  .legend-item.star{ color:var(--gold); grid-column:1/-1; }
+  .legend-item.star b{ color:var(--gold); }
 
-  /* Week block */
   .block{ margin-top:18px; }
-  .block-bar{
-    background:var(--p-600); color:#fff; font-size:11px; font-weight:700;
-    letter-spacing:.04em; padding:7px 12px; border-radius:8px 8px 0 0;
-    display:flex; justify-content:space-between; align-items:center;
-  }
+  .block-bar{ background:var(--p-600); color:#fff; font-size:11px; font-weight:700; letter-spacing:.04em; padding:7px 12px; border-radius:8px 8px 0 0; display:flex; justify-content:space-between; align-items:center; }
   .block-range{ font-size:9px; color:var(--p-100); font-weight:500; }
-  .grid-table{
-    background:var(--card); border:1px solid var(--border); border-top:none;
-    border-radius:0 0 10px 10px; overflow:hidden;
-  }
-  .grow{ display:grid; grid-template-columns:118px repeat(7,1fr); }
-  .growhead{ display:grid; grid-template-columns:118px repeat(7,1fr); border-bottom:1px solid var(--border); }
-  .ghcell{
-    text-align:center; font-size:10px; font-weight:700; color:var(--muted-2);
-    padding:7px 2px; border-left:1px solid var(--border);
-  }
+  .grid-table{ background:var(--card); border:1px solid var(--border); border-top:none; border-radius:0 0 10px 10px; overflow:hidden; }
+  .grow{ display:grid; grid-template-columns:110px repeat(7,1fr); }
+  .grow.extra{ background:var(--gold-bg); }
+  .growhead{ display:grid; grid-template-columns:110px repeat(7,1fr); border-bottom:1px solid var(--border); }
+  .ghcell{ text-align:center; font-size:10px; font-weight:700; color:var(--muted-2); padding:7px 2px; border-left:1px solid var(--border); }
   .ghcell.today{ background:var(--p-100); color:var(--p-700); }
   .ghcell.blank{ color:transparent; }
-  .rowlabel{
-    display:flex; align-items:center; gap:5px; font-size:10.5px; font-weight:600;
-    padding:0 8px; color:var(--text); border-top:1px solid var(--border); line-height:1.2;
-  }
+  .rowlabel{ display:flex; align-items:center; gap:5px; font-size:10.5px; font-weight:600; padding:0 8px; color:var(--text); border-top:1px solid var(--border); line-height:1.2; }
   .row-icon{ font-size:12px; flex-shrink:0; }
-  .cell-wrap{
-    display:flex; align-items:center; justify-content:center;
-    border-left:1px solid var(--border); border-top:1px solid var(--border);
-    padding:6px 0;
-  }
+  .cell-wrap{ display:flex; align-items:center; justify-content:center; border-left:1px solid var(--border); border-top:1px solid var(--border); padding:6px 0; }
   .cell-wrap.today{ background:var(--p-100); }
-  .cbx{
-    width:22px; height:22px; border-radius:5px; border:1.5px solid var(--border);
-    background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center;
-    font-size:13px; color:#fff; padding:0;
-  }
+  .grow.extra .cell-wrap.today{ background:#f5e6b8; }
+  .cbx{ width:24px; height:24px; border-radius:6px; border:1.5px solid var(--border); background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:13px; color:#fff; padding:0; }
   .cbx.on{ background:var(--p-600); border-color:var(--p-600); }
+  .cbx.on.gold{ background:var(--gold); border-color:var(--gold); }
   .cbx.blank{ visibility:hidden; }
 
-  /* Weight */
-  .section-title{
-    font-size:11px; font-weight:800; color:var(--muted);
-    margin:22px 4px 8px; text-transform:uppercase; letter-spacing:.07em;
-  }
-  .weight-card{
-    background:var(--card); border:1px solid var(--border); border-radius:12px;
-    padding:14px; margin-bottom:10px;
-  }
-  .weight-input-row{ display:flex; align-items:baseline; justify-content:space-between; }
-  .weight-input-row .lbl{ font-size:12px; color:var(--muted); font-weight:600; }
-  .weight-input-row input[type=number]{
-    width:100px; font-family:'Fraunces',serif; font-size:22px; font-weight:600;
-    text-align:right; border:none; background:transparent; color:var(--text); outline:none;
-  }
-  .weight-input-row .unit{ font-size:12px; color:var(--muted-2); margin-left:4px; }
-  .weight-chart-card{
-    background:var(--card); border:1px solid var(--border); border-radius:12px;
-    padding:14px; margin-bottom:10px;
-  }
-  .weight-chart-empty{ font-size:11px; color:var(--muted-2); text-align:center; padding:16px 0; }
-  .weight-stats{ display:flex; justify-content:space-between; margin-top:10px; }
-  .weight-stat{ text-align:center; flex:1; }
-  .weight-stat .v{ font-family:'Fraunces',serif; font-size:14px; font-weight:600; color:var(--text); }
-  .weight-stat .l{ font-size:8.5px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.04em; margin-top:2px; }
-  .weight-stat .v.down{ color:var(--p-600); }
-  .weight-stat .v.up{ color:var(--warn); }
+  .section-title{ font-size:11px; font-weight:800; color:var(--muted); margin:22px 4px 8px; text-transform:uppercase; letter-spacing:.07em; }
 
-  .summary-card{
-    background:var(--card); border:1px solid var(--border); border-radius:12px;
-    padding:14px; margin-bottom:10px;
+  .measure-card{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px; margin-bottom:10px; }
+  .measure-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .measure-field{ display:flex; flex-direction:column; gap:2px; }
+  .measure-field .lbl{ font-size:10px; color:var(--muted); font-weight:600; }
+  .measure-field .input-row{ display:flex; align-items:baseline; gap:3px; }
+  .measure-field input[type=number]{
+    width:100%; font-family:'Fraunces',serif; font-size:18px; font-weight:600;
+    border:none; border-bottom:1.5px solid var(--border); background:transparent; color:var(--text);
+    outline:none; padding:2px 0;
   }
+  .measure-field .unit{ font-size:10px; color:var(--muted-2); white-space:nowrap; }
+
+  .chart-card{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px; margin-bottom:10px; }
+  .chart-tabs{ display:flex; gap:6px; margin-bottom:12px; }
+  .tab-btn{ flex:1; border:1px solid var(--border); background:var(--bg); color:var(--muted); font-family:'Manrope',sans-serif; font-weight:600; font-size:10.5px; padding:7px 4px; border-radius:8px; cursor:pointer; }
+  .tab-btn.active{ background:var(--p-600); border-color:var(--p-600); color:#fff; }
+  .chart-empty{ font-size:11px; color:var(--muted-2); text-align:center; padding:16px 0; }
+  .chart-stats{ display:flex; justify-content:space-between; margin-top:10px; }
+  .chart-stat{ text-align:center; flex:1; }
+  .chart-stat .v{ font-family:'Fraunces',serif; font-size:14px; font-weight:600; color:var(--text); }
+  .chart-stat .l{ font-size:8.5px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.04em; margin-top:2px; }
+  .chart-stat .v.down{ color:var(--p-600); }
+  .chart-stat .v.up{ color:var(--warn); }
+
+  .summary-card{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px; margin-bottom:10px; }
   .summary-row{ display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid var(--border); }
   .summary-row:last-child{ border-bottom:none; }
+  .summary-row.extra{ margin-top:2px; padding-top:12px; border-top:1px dashed var(--border); }
   .summary-icon{ font-size:13px; width:18px; text-align:center; flex-shrink:0; }
-  .summary-label{ font-size:11px; font-weight:600; color:var(--text); width:80px; flex-shrink:0; }
+  .summary-label{ font-size:11px; font-weight:600; color:var(--text); width:78px; flex-shrink:0; }
   .summary-bar-wrap{ flex:1; height:8px; border-radius:6px; background:var(--p-100); overflow:hidden; }
   .summary-bar-fill{ height:100%; background:var(--p-600); border-radius:6px; }
+  .summary-bar-fill.gold{ background:var(--gold); }
   .summary-pct{ font-size:11px; font-weight:700; color:var(--text); width:38px; text-align:right; flex-shrink:0; }
   .summary-count{ font-size:9px; color:var(--muted-2); width:44px; text-align:right; flex-shrink:0; }
-  .summary-overall{
-    display:flex; justify-content:space-between; align-items:baseline;
-    margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--border);
-  }
+  .summary-overall{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--border); }
   .summary-overall .v{ font-family:'Fraunces',serif; font-size:26px; font-weight:600; color:var(--p-700); }
   .summary-overall .l{ font-size:10px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.05em; }
+  .summary-note{ font-size:9px; color:var(--gold); margin-top:4px; }
 
   .footer-note{ text-align:center; font-size:10px; color:var(--muted-2); margin-top:22px; line-height:1.6; }
   .loading{ text-align:center; padding:40px 0; color:var(--muted-2); font-size:12px;}
@@ -152,57 +119,53 @@
 const CHALLENGE_END = new Date(2026, 9, 28); // 28/10/2026
 
 const ROWS = [
-  {key:'cafe', short:'Café', icon:'☀️', full:'Café da manhã dentro da dieta'},
-  {key:'almoco', short:'Almoço', icon:'🍽️', full:'Almoço dentro da dieta'},
-  {key:'lanche', short:'Lanche', icon:'🥪', full:'Lanche da tarde dentro da dieta'},
-  {key:'jantarJejum', short:'Jejum jantar', icon:'🌙', full:'Jantar em jejum'},
-  {key:'agua', short:'Água 3L', icon:'💧', full:'3 litros de água'},
-  {key:'semAcucar', short:'Sem açúcar', icon:'🚫', full:'Sem açúcar'},
-  {key:'livro', short:'Livro 10p', icon:'📖', full:'10 páginas de livro'},
-  {key:'tela', short:'Tela ≤4h', icon:'📵', full:'Máx. 4h de tela'},
-  {key:'video', short:'Vídeo/pod', icon:'🎧', full:'Um vídeo/podcast diferente'},
-  {key:'cardio', short:'Cardio', icon:'🏃', full:'Cardio (meta todo dia)'},
-  {key:'musculacao', short:'Musculação', icon:'🏋️', full:'Musculação (meta 25 treinos até 28/10)'},
-  {key:'gratidao', short:'Gratidão', icon:'📝', full:'Diário da gratidão'},
-  {key:'skincare', short:'Skincare', icon:'✨', full:'Skincare'},
+  {key:'treino', short:'Treino', icon:'🏋️', full:'Treino do dia'},
+  {key:'cardio', short:'Cardio', icon:'🏃', full:'Cardio'},
+  {key:'livro', short:'10 páginas', icon:'📖', full:'10 páginas de livro'},
+  {key:'dieta', short:'Dieta', icon:'🥗', full:'Dentro da dieta'},
+  {key:'zeroAlcool', short:'Zero álcool', icon:'🚫', full:'Zero álcool'},
+  {key:'zeroAcucar', short:'Zero açúcar', icon:'🍬', full:'Zero açúcar'},
+];
+const EXTRA_ROW = {key:'estudar', short:'Estudar', icon:'⭐️', full:'Estudar (bônus — não conta no 100%)'};
+
+const MEASURES = [
+  {key:'peso', label:'Peso', unit:'kg'},
+  {key:'cintura', label:'Cintura', unit:'cm'},
+  {key:'abdomen', label:'Abdômen', unit:'cm'},
+  {key:'gluteo', label:'Glúteo', unit:'cm'},
 ];
 
-function fmtDate(d){
-  const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0');
-  return `${y}-${m}-${day}`;
-}
+function fmtDate(d){ const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0'); return `${y}-${m}-${day}`; }
 function todayStr(){ return fmtDate(new Date()); }
 function shortDM(dStr){ const d=new Date(dStr+'T00:00:00'); return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`; }
 
 let allDaysMap = {};
 let config = { startDate: null };
+let chartMeasure = 'peso';
 
 function emptyDay(){
-  const d = { peso:null };
+  const d = { peso:null, cintura:null, abdomen:null, gluteo:null };
   ROWS.forEach(r => d[r.key] = false);
+  d[EXTRA_ROW.key] = false;
   return d;
 }
 
 function migrate(raw){
   if(!raw) return emptyDay();
-  if(raw.meals){
-    // old shape -> convert best-effort
+  if('musculacao' in raw || 'jantarJejum' in raw){
     return {
-      cafe: !!(raw.meals.cafe),
-      almoco: !!(raw.meals.almoco),
-      lanche: !!(raw.meals.lanche),
-      jantarJejum: !!raw.jantarJejum,
-      agua: (raw.water||0) >= 12,
-      semAcucar: !!raw.semAcucar,
-      livro: (raw.livroPaginas||0) >= 10,
-      tela: (raw.telaHoras||0) <= 4,
-      video: !!raw.videoPodcast,
+      treino: !!raw.musculacao,
       cardio: !!raw.cardio,
-      musculacao: !!raw.musculacao,
-      gratidao: !!raw.gratidao,
-      skincare: !!raw.skincare,
-      peso: raw.peso ?? null
+      livro: !!raw.livro,
+      dieta: !!(raw.cafe && raw.almoco && raw.lanche),
+      zeroAlcool: false,
+      zeroAcucar: !!raw.semAcucar,
+      estudar: !!raw.gratidao, // best-effort, unrelated old field ignored
+      peso: raw.peso ?? null, cintura:null, abdomen:null, gluteo:null
     };
+  }
+  if(raw.meals){
+    return Object.assign(emptyDay(), { peso: raw.peso ?? null });
   }
   return Object.assign(emptyDay(), raw);
 }
@@ -235,28 +198,39 @@ function challengeDates(){
   return dates;
 }
 function chunk(arr,size){ const out=[]; for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i,i+size)); return out; }
+function elapsedDates(){ const today = todayStr(); return challengeDates().filter(d => d <= today); }
 
-function muscTotal(){
-  let n=0;
-  Object.values(allDaysMap).forEach(d => { if(d.musculacao) n++; });
-  return n;
+function buildSummary(){
+  const dates = elapsedDates();
+  const total = dates.length;
+  let overallDone = 0, overallSlots = 0;
+  const rows = ROWS.map(r => {
+    let count = 0;
+    dates.forEach(dStr => { const d = allDaysMap[dStr]; if(d && d[r.key]) count++; });
+    overallDone += count; overallSlots += total;
+    return { r, count, total, pct: total ? Math.round((count/total)*100) : 0 };
+  });
+  let extraCount = 0;
+  dates.forEach(dStr => { const d = allDaysMap[dStr]; if(d && d[EXTRA_ROW.key]) extraCount++; });
+  const overallPct = overallSlots ? Math.round((overallDone/overallSlots)*100) : 0;
+  return { rows, overallPct, total, extraCount };
 }
 
-function getWeightSeries(){
+function getMeasureSeries(key){
   return Object.keys(allDaysMap)
-    .filter(k => allDaysMap[k].peso != null && allDaysMap[k].peso !== '')
+    .filter(k => allDaysMap[k][key] != null && allDaysMap[k][key] !== '')
     .sort()
-    .map(k => ({ date:k, peso: parseFloat(allDaysMap[k].peso) }));
+    .map(k => ({ date:k, val: parseFloat(allDaysMap[k][key]) }));
 }
-function weightChartSVG(series){
+function measureChartSVG(series){
   const W=480,H=140,padX=12,padY=16;
-  const vals=series.map(s=>s.peso);
+  const vals=series.map(s=>s.val);
   const min=Math.min(...vals), max=Math.max(...vals);
   const range=(max-min)||1;
   const stepX = series.length>1 ? (W-padX*2)/(series.length-1) : 0;
   const points = series.map((s,i)=>{
     const x=padX+i*stepX;
-    const y=padY+(H-padY*2)*(1-(s.peso-min)/range);
+    const y=padY+(H-padY*2)*(1-(s.val-min)/range);
     return {x,y,...s};
   });
   const pathD = points.map((p,i)=>(i===0?'M':'L')+p.x.toFixed(1)+' '+p.y.toFixed(1)).join(' ');
@@ -267,31 +241,6 @@ function weightChartSVG(series){
   </svg>`;
 }
 
-function elapsedDates(){
-  const dates = challengeDates();
-  const today = todayStr();
-  return dates.filter(d => d <= today);
-}
-
-function buildSummary(){
-  const dates = elapsedDates();
-  const total = dates.length;
-  let overallDone = 0, overallSlots = 0;
-  const rows = ROWS.map(r => {
-    let count = 0;
-    dates.forEach(dStr => {
-      const d = allDaysMap[dStr];
-      if(d && d[r.key]) count++;
-    });
-    overallDone += count;
-    overallSlots += total;
-    const pct = total ? Math.round((count/total)*100) : 0;
-    return { r, count, total, pct };
-  });
-  const overallPct = overallSlots ? Math.round((overallDone/overallSlots)*100) : 0;
-  return { rows, overallPct, total };
-}
-
 function render(){
   const app = document.getElementById('app');
   const dates = challengeDates();
@@ -299,6 +248,7 @@ function render(){
   const now = new Date();
   const daysLeft = Math.ceil((CHALLENGE_END - new Date(now.getFullYear(),now.getMonth(),now.getDate())) / 86400000);
   const today = todayStr();
+  const idx = dates.indexOf(today);
 
   let html = '';
 
@@ -306,9 +256,8 @@ function render(){
     <div class="eyebrow">Desafio</div>
     <h1>Até 28 de outubro</h1>
     <div class="header-row">
-      <span>Dia <b>${Math.min(dates.indexOf(today)+1 > 0 ? dates.indexOf(today)+1 : dates.length, dates.length)}</b> de ${dates.length}</span>
+      <span>Dia <b>${idx>=0 ? idx+1 : dates.length}</b> de ${dates.length}</span>
       <span><b>${daysLeft >= 0 ? daysLeft : 0}</b> dias restantes</span>
-      <span>Musculação <b>${muscTotal()}/25</b></span>
     </div>
   </div>`;
 
@@ -316,24 +265,21 @@ function render(){
     <div class="legend-title">O que cada item significa</div>
     <div class="legend-grid">
       ${ROWS.map(r => `<div class="legend-item"><b>${r.short}</b> — ${r.full}</div>`).join('')}
+      <div class="legend-item star"><b>${EXTRA_ROW.icon} ${EXTRA_ROW.short}</b> — ${EXTRA_ROW.full}</div>
     </div>
   </div>`;
 
   blocks.forEach((block, bi) => {
     const startNum = bi*7+1, endNum = bi*7+block.length;
     html += `<div class="block">
-      <div class="block-bar">
-        <span>DIA ${startNum} AO ${endNum}</span>
-        <span class="block-range">${shortDM(block[0])} – ${shortDM(block[block.length-1])}</span>
-      </div>
+      <div class="block-bar"><span>DIA ${startNum} AO ${endNum}</span><span class="block-range">${shortDM(block[0])} – ${shortDM(block[block.length-1])}</span></div>
       <div class="grid-table">
         <div class="growhead">
           <div class="ghcell blank"></div>
           ${Array.from({length:7}).map((_,ci) => {
             const dStr = block[ci];
             if(!dStr) return `<div class="ghcell blank"></div>`;
-            const isToday = dStr === today;
-            return `<div class="ghcell ${isToday?'today':''}">${startNum+ci}</div>`;
+            return `<div class="ghcell ${dStr===today?'today':''}">${startNum+ci}</div>`;
           }).join('')}
         </div>
         ${ROWS.map(r => `
@@ -342,45 +288,62 @@ function render(){
             ${Array.from({length:7}).map((_,ci) => {
               const dStr = block[ci];
               if(!dStr) return `<div class="cell-wrap"><button class="cbx blank"></button></div>`;
-              const isToday = dStr === today;
               const d = allDaysMap[dStr] || emptyDay();
               const checked = !!d[r.key];
-              return `<div class="cell-wrap ${isToday?'today':''}">
-                <button class="cbx ${checked?'on':''}" data-date="${dStr}" data-key="${r.key}">${checked?'✓':''}</button>
-              </div>`;
+              return `<div class="cell-wrap ${dStr===today?'today':''}"><button class="cbx ${checked?'on':''}" data-date="${dStr}" data-key="${r.key}">${checked?'✓':''}</button></div>`;
             }).join('')}
           </div>
         `).join('')}
+        <div class="grow extra">
+          <div class="rowlabel"><span class="row-icon">${EXTRA_ROW.icon}</span>${EXTRA_ROW.short}</div>
+          ${Array.from({length:7}).map((_,ci) => {
+            const dStr = block[ci];
+            if(!dStr) return `<div class="cell-wrap"><button class="cbx blank"></button></div>`;
+            const d = allDaysMap[dStr] || emptyDay();
+            const checked = !!d[EXTRA_ROW.key];
+            return `<div class="cell-wrap ${dStr===today?'today':''}"><button class="cbx ${checked?'on gold':''}" data-date="${dStr}" data-key="${EXTRA_ROW.key}">${checked?'✓':''}</button></div>`;
+          }).join('')}
+        </div>
       </div>
     </div>`;
   });
 
-  const weightSeries = getWeightSeries();
   const todayData = allDaysMap[today] || emptyDay();
-  html += `<div class="section-title">Peso</div>`;
-  html += `<div class="weight-card">
-    <div class="weight-input-row">
-      <span class="lbl">Peso de hoje</span>
-      <div><input type="number" step="0.1" min="0" id="pesoInput" value="${todayData.peso ?? ''}" placeholder="—"/><span class="unit">kg</span></div>
-    </div>
-  </div>`;
-  if(weightSeries.length >= 2){
-    const vals = weightSeries.map(s=>s.peso);
+  html += `<div class="section-title">Peso e medidas</div>`;
+  html += `<div class="measure-card"><div class="measure-grid">
+    ${MEASURES.map(m => `
+      <div class="measure-field">
+        <span class="lbl">${m.label}</span>
+        <div class="input-row">
+          <input type="number" step="0.1" min="0" id="m_${m.key}" value="${todayData[m.key] ?? ''}" placeholder="—"/>
+          <span class="unit">${m.unit}</span>
+        </div>
+      </div>
+    `).join('')}
+  </div></div>`;
+
+  const series = getMeasureSeries(chartMeasure);
+  const activeMeasure = MEASURES.find(m => m.key===chartMeasure);
+  html += `<div class="chart-card">
+    <div class="chart-tabs">
+      ${MEASURES.map(m => `<button class="tab-btn ${chartMeasure===m.key?'active':''}" data-measure="${m.key}">${m.label}</button>`).join('')}
+    </div>`;
+  if(series.length >= 2){
+    const vals = series.map(s=>s.val);
     const first=vals[0], last=vals[vals.length-1];
     const diff = +(last-first).toFixed(1);
     const min = Math.min(...vals), max = Math.max(...vals);
-    html += `<div class="weight-chart-card">
-      ${weightChartSVG(weightSeries)}
-      <div class="weight-stats">
-        <div class="weight-stat"><div class="v">${last} kg</div><div class="l">atual</div></div>
-        <div class="weight-stat"><div class="v ${diff<0?'down':(diff>0?'up':'')}">${diff>0?'+':''}${diff} kg</div><div class="l">variação</div></div>
-        <div class="weight-stat"><div class="v">${min} kg</div><div class="l">mínimo</div></div>
-        <div class="weight-stat"><div class="v">${max} kg</div><div class="l">máximo</div></div>
-      </div>
-    </div>`;
+    html += `${measureChartSVG(series)}
+      <div class="chart-stats">
+        <div class="chart-stat"><div class="v">${last} ${activeMeasure.unit}</div><div class="l">atual</div></div>
+        <div class="chart-stat"><div class="v ${diff<0?'down':(diff>0?'up':'')}">${diff>0?'+':''}${diff} ${activeMeasure.unit}</div><div class="l">variação</div></div>
+        <div class="chart-stat"><div class="v">${min} ${activeMeasure.unit}</div><div class="l">mínimo</div></div>
+        <div class="chart-stat"><div class="v">${max} ${activeMeasure.unit}</div><div class="l">máximo</div></div>
+      </div>`;
   } else {
-    html += `<div class="weight-chart-card"><div class="weight-chart-empty">registre o peso em pelo menos 2 dias para ver a evolução</div></div>`;
+    html += `<div class="chart-empty">registre ${activeMeasure.label.toLowerCase()} em pelo menos 2 dias para ver a evolução</div>`;
   }
+  html += `</div>`;
 
   const summary = buildSummary();
   html += `<div class="section-title">Resumo do desafio</div>`;
@@ -398,6 +361,14 @@ function render(){
         <span class="summary-count">${s.count}/${s.total}</span>
       </div>
     `).join('')}
+    <div class="summary-row extra">
+      <span class="summary-icon">${EXTRA_ROW.icon}</span>
+      <span class="summary-label">${EXTRA_ROW.short}</span>
+      <div class="summary-bar-wrap"><div class="summary-bar-fill gold" style="width:${summary.total?Math.round(summary.extraCount/summary.total*100):0}%"></div></div>
+      <span class="summary-pct">${summary.total?Math.round(summary.extraCount/summary.total*100):0}%</span>
+      <span class="summary-count">${summary.extraCount}/${summary.total}</span>
+    </div>
+    <div class="summary-note">⭐️ estudar é bônus — não entra no % geral</div>
   </div>`;
 
   html += `<div class="footer-note">toque nos quadrados para marcar cada dia — seus dados ficam salvos automaticamente</div>`;
@@ -416,17 +387,22 @@ function attachHandlers(){
       render();
     };
   });
-  const pesoInput = document.getElementById('pesoInput');
-  if(pesoInput){
-    pesoInput.addEventListener('change', () => {
-      const today = todayStr();
-      if(!allDaysMap[today]) allDaysMap[today] = emptyDay();
-      const v = parseFloat(pesoInput.value);
-      allDaysMap[today].peso = isNaN(v) ? null : v;
-      saveDay(today, allDaysMap[today]);
-      render();
-    });
-  }
+  MEASURES.forEach(m => {
+    const input = document.getElementById('m_'+m.key);
+    if(input){
+      input.addEventListener('change', () => {
+        const today = todayStr();
+        if(!allDaysMap[today]) allDaysMap[today] = emptyDay();
+        const v = parseFloat(input.value);
+        allDaysMap[today][m.key] = isNaN(v) ? null : v;
+        saveDay(today, allDaysMap[today]);
+        render();
+      });
+    }
+  });
+  document.querySelectorAll('[data-measure]').forEach(btn => {
+    btn.onclick = () => { chartMeasure = btn.dataset.measure; render(); };
+  });
 }
 
 async function init(){
